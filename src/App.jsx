@@ -28,10 +28,6 @@ export default function App() {
     });
   }
 
-  const selectedTasks = state.tasks.filter(
-    (task) => task.projectId === state.projectId
-  );
-
   function handleDeleteTask(id) {
     setState((prevState) => {
       return {
@@ -100,11 +96,9 @@ export default function App() {
     (project) => project.id === state.projectId
   );
 
-  const selectedProjectTasks = state.tasks.filter(
-    (task) => task.id === selectedProject.id
+  const selectedTasks = state.tasks.filter(
+    (task) => task.projectId === state.projectId
   );
-
-  console.log(selectedProject);
 
   let content = (
     <ProjectPage
