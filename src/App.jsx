@@ -18,14 +18,23 @@ export default function App() {
     });
   }
 
-  console.log(state);
+  function handleCancelProjectCreation() {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        projectId: undefined,
+      };
+    });
+  }
 
   let content;
 
   if (state.projectId === undefined) {
     content = <NoProjectSelected startProject={handleAddNewProjectStart} />;
   } else if (state.projectId === null) {
-    content = <NewProject />;
+    content = (
+      <NewProject cancelProjectCreation={handleCancelProjectCreation} />
+    );
   }
 
   return (
