@@ -1,4 +1,11 @@
-export default function SideBar({ startProject, projects, onSelect }) {
+export default function SideBar({
+  startProject,
+  projects,
+  onSelect,
+  selectedProject,
+}) {
+  let cssStyle = "w-full text-left rounded-md px-2";
+
   return (
     <aside className="bg-stone-700 w-1/3 md:w-72 px-8 py-16 h-screen rounded-r-md">
       <h2 className="uppercase text-stone-300 mb-8">Your Projects</h2>
@@ -10,16 +17,21 @@ export default function SideBar({ startProject, projects, onSelect }) {
       </button>
 
       <ul className="text-stone-400 ">
-        {projects.map((project) => (
-          <li key={project.id}>
-            <button
-              onClick={() => onSelect(project.id)}
-              className="w-full text-left hover:bg-stone-500 hover:text-stone-100 rounded-md px-2"
-            >
-              {project.title}
-            </button>
-          </li>
-        ))}
+        {projects.map((project) => {
+          if (selectedProject === project.id) {
+            cssStyle += " bg-stone-500 text-stone-100";
+          } else {
+            cssStyle = "w-full text-left rounded-md px-2";
+          }
+
+          return (
+            <li key={project.id} className={cssStyle}>
+              <button onClick={() => onSelect(project.id)}>
+                {project.title}
+              </button>
+            </li>
+          );
+        })}
       </ul>
     </aside>
   );

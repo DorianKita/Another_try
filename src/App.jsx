@@ -35,8 +35,6 @@ export default function App() {
     });
   }
 
-  console.log(state);
-
   function handleDeleteProject() {
     setState((prevState) => {
       return {
@@ -123,6 +121,7 @@ export default function App() {
         startProject={handleAddNewProjectStart}
         projects={state.projects}
         onSelect={handleProjectSelect}
+        selectedProject={state.projectId}
       />
       {content}
     </div>
