@@ -1,7 +1,25 @@
 import Input from "./Input.jsx";
 import Button from "./Button.jsx";
+import { useRef } from "react";
 
-export default function NewProject({ cancelProjectCreation }) {
+export default function NewProject({
+  cancelProjectCreation,
+  saveProjectCreation,
+}) {
+  const title = useRef();
+  const description = useRef();
+  const date = useRef();
+
+  function handleSaveProject() {
+    if (title === "" || description === "" || date === "") return;
+
+    saveProjectCreation({
+      title: title.current.value,
+      description: description.current.value,
+      date: date.current.value,
+    });
+  }
+
   return (
     <div className="px-8 py-16 w-2/6">
       <div className="flex justify-between items-start">
@@ -13,13 +31,13 @@ export default function NewProject({ cancelProjectCreation }) {
           >
             Cancel
           </button>
-          <Button>Save</Button>
+          <Button onClick={handleSaveProject}>Save</Button>
         </div>
       </div>
 
-      <Input type="text" label="Title" />
-      <Input label="Description" textarea />
-      <Input type="date" label="Due Date" />
+      <Input ref={title} type="text" label="Title" />
+      <Input ref={description} label="Description" textarea />
+      <Input ref={date} type="date" label="Due Date" />
     </div>
   );
 }

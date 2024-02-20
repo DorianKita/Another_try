@@ -9,6 +9,8 @@ export default function App() {
     projects: [],
   });
 
+  console.log(state.projects);
+
   function handleAddNewProjectStart() {
     setState((prevState) => {
       return {
@@ -27,13 +29,31 @@ export default function App() {
     });
   }
 
+  function handleProjectCreationSave(projectData) {
+    setState((prevState) => {
+      const index = Math.random();
+      const newProject = {
+        id: index,
+        ...projectData,
+      };
+
+      return {
+        ...prevState,
+        projects: [...prevState.projects, newProject],
+      };
+    });
+  }
+
   let content;
 
   if (state.projectId === undefined) {
     content = <NoProjectSelected startProject={handleAddNewProjectStart} />;
   } else if (state.projectId === null) {
     content = (
-      <NewProject cancelProjectCreation={handleCancelProjectCreation} />
+      <NewProject
+        cancelProjectCreation={handleCancelProjectCreation}
+        saveProjectCreation={handleProjectCreationSave}
+      />
     );
   }
 
