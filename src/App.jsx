@@ -1,7 +1,8 @@
 import { useState } from "react";
-import NewProject from "./components/NewProject";
-import NoProjectSelected from "./components/NoProjectSelected";
-import SideBar from "./components/SideBar";
+import NewProject from "./components/NewProject.jsx";
+import NoProjectSelected from "./components/NoProjectSelected.jsx";
+import SideBar from "./components/SideBar.jsx";
+import ProjectPage from "./components/ProjectPage.jsx";
 
 export default function App() {
   const [state, setState] = useState({
@@ -9,7 +10,14 @@ export default function App() {
     projects: [],
   });
 
-  console.log(state.projects);
+  function handleProjectSelect(id) {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        projectId: id,
+      };
+    });
+  }
 
   function handleAddNewProjectStart() {
     setState((prevState) => {
@@ -45,7 +53,13 @@ export default function App() {
     });
   }
 
-  let content;
+  const selectedProject = state.projects.find(
+    (project) => project.id === state.projectId
+  );
+
+  console.log(selectedProject);
+
+  let content = <ProjectPage displayProject={selectedProject} />;
 
   if (state.projectId === undefined) {
     content = <NoProjectSelected startProject={handleAddNewProjectStart} />;
@@ -63,6 +77,7 @@ export default function App() {
       <SideBar
         startProject={handleAddNewProjectStart}
         projects={state.projects}
+        onSelect={handleProjectSelect}
       />
       {content}
     </div>

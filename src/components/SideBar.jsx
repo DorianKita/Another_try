@@ -1,4 +1,4 @@
-export default function SideBar({ startProject, projects }) {
+export default function SideBar({ startProject, projects, onSelect }) {
   return (
     <aside className="bg-stone-700 w-1/3 md:w-72 px-8 py-16 h-screen rounded-r-md">
       <h2 className="uppercase text-stone-300 mb-8">Your Projects</h2>
@@ -11,7 +11,11 @@ export default function SideBar({ startProject, projects }) {
 
       <ul className="text-stone-400">
         {projects.map((project) => (
-          <li key={project.id}>{project.title}</li>
+          <li key={project.id}>
+            <button onClick={() => onSelect(project.id)}>
+              {project.title}
+            </button>
+          </li>
         ))}
       </ul>
     </aside>
