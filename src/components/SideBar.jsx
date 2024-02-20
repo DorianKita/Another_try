@@ -9,10 +9,13 @@ export default function SideBar({ startProject, projects, onSelect }) {
         + Add project
       </button>
 
-      <ul className="text-stone-400">
+      <ul className="text-stone-400 ">
         {projects.map((project) => (
           <li key={project.id}>
-            <button onClick={() => onSelect(project.id)}>
+            <button
+              onClick={() => onSelect(project.id)}
+              className="w-full text-left hover:bg-stone-500 hover:text-stone-100 rounded-md px-2"
+            >
               {project.title}
             </button>
           </li>
