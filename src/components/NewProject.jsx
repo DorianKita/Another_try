@@ -11,7 +11,13 @@ export default function NewProject({
   const date = useRef();
 
   function handleSaveProject() {
-    if (title === "" || description === "" || date === "") return;
+    if (
+      title.current.value === "" ||
+      description.current.value === "" ||
+      date.current.value === ""
+    ) {
+      return;
+    }
 
     saveProjectCreation({
       title: title.current.value,

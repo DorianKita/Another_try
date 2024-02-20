@@ -1,4 +1,4 @@
-export default function SideBar({ startProject }) {
+export default function SideBar({ startProject, projects }) {
   return (
     <aside className="bg-stone-700 w-1/3 md:w-72 px-8 py-16 h-screen">
       <h2 className="uppercase text-stone-300 mb-8">Your Projects</h2>
@@ -10,7 +10,9 @@ export default function SideBar({ startProject }) {
       </button>
 
       <ul className="text-stone-400">
-        <li>lista projektów</li>
+        {projects.map((project) => (
+          <li key={project.id}>{project.title}</li>
+        ))}
       </ul>
     </aside>
   );

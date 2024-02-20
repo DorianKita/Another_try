@@ -39,6 +39,7 @@ export default function App() {
 
       return {
         ...prevState,
+        projectId: undefined,
         projects: [...prevState.projects, newProject],
       };
     });
@@ -59,7 +60,10 @@ export default function App() {
 
   return (
     <div className="flex gap-8 my-8">
-      <SideBar startProject={handleAddNewProjectStart} />
+      <SideBar
+        startProject={handleAddNewProjectStart}
+        projects={state.projects}
+      />
       {content}
     </div>
   );
