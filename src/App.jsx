@@ -10,6 +10,18 @@ export default function App() {
     projects: [],
   });
 
+  function handleDeleteProject() {
+    setState((prevState) => {
+      return {
+        ...prevState,
+        projectId: undefined,
+        projects: prevState.projects.filter(
+          (project) => project.id !== prevState.projectId
+        ),
+      };
+    });
+  }
+
   function handleProjectSelect(id) {
     setState((prevState) => {
       return {
@@ -57,9 +69,12 @@ export default function App() {
     (project) => project.id === state.projectId
   );
 
-  console.log(selectedProject);
-
-  let content = <ProjectPage displayProject={selectedProject} />;
+  let content = (
+    <ProjectPage
+      displayProject={selectedProject}
+      onDelete={handleDeleteProject}
+    />
+  );
 
   if (state.projectId === undefined) {
     content = <NoProjectSelected startProject={handleAddNewProjectStart} />;
