@@ -12,12 +12,14 @@ export default function App() {
   });
 
   function handleSaveTask(newTaskData) {
-    const taskId = Math.random();
-    const newTask = {
-      id: Math.random(),
-      text: newTaskData,
-    };
     setState((prevState) => {
+      const taskId = Math.random();
+      const newTask = {
+        id: Math.random(),
+        text: newTaskData,
+        projectId: prevState.projectId,
+      };
+
       return {
         ...prevState,
         id: taskId,
@@ -25,6 +27,10 @@ export default function App() {
       };
     });
   }
+
+  const selectedTasks = state.tasks.filter(
+    (task) => task.projectId === state.projectId
+  );
 
   function handleDeleteTask(id) {
     setState((prevState) => {
@@ -94,12 +100,18 @@ export default function App() {
     (project) => project.id === state.projectId
   );
 
+  const selectedProjectTasks = state.tasks.filter(
+    (task) => task.id === selectedProject.id
+  );
+
+  console.log(selectedProject);
+
   let content = (
     <ProjectPage
       displayProject={selectedProject}
       onDelete={handleDeleteProject}
       onAddTask={handleSaveTask}
-      tasks={state.tasks}
+      tasks={selectedTasks}
       onDeleteTask={handleDeleteTask}
     />
   );
