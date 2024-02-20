@@ -1,8 +1,8 @@
 import img from "../assets/6027813_35946.jpg";
 import Button from "./Button.jsx";
-export default function NoProjectSelected() {
+export default function NoProjectSelected({ startProject }) {
   return (
-    <div className="w-2/3 text-center">
+    <div className="w-1/3 text-center">
       <img
         src={img}
         alt="empty project page"
@@ -10,10 +10,9 @@ export default function NoProjectSelected() {
       />
       <h2 className="text-3xl mt-8 text-stone-400">No project was selected.</h2>
       <p className="mb-8">
-        {" "}
         Create a new project or pick existing one from sidebar.
       </p>
-      <Button>New Project</Button>
+      <Button onClick={startProject}>New Project</Button>
     </div>
   );
 }
