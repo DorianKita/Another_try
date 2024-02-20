@@ -1,6 +1,6 @@
 export default function SideBar({ startProject, projects }) {
   return (
-    <aside className="bg-stone-700 w-1/3 md:w-72 px-8 py-16 h-screen">
+    <aside className="bg-stone-700 w-1/3 md:w-72 px-8 py-16 h-screen rounded-r-md">
       <h2 className="uppercase text-stone-300 mb-8">Your Projects</h2>
       <button
         onClick={startProject}
